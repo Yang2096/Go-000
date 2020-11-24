@@ -17,8 +17,6 @@
 4. 最后将远程仓库中当周的作业链接，按格式贴到班级仓库对应学习周的issue下面。
 5. 提交issue请务必按照规定格式进行提交，否则作业统计工具将抓取不到你的作业提交记录。 
 
-详细的作业提交流程可以查阅：https://shimo.im/docs/m5rtM8K8rNsjw5jk/ 
-
 ## 提交格式
 
 ```
@@ -27,7 +25,4 @@
 #班级:5班
 #作业&总结链接:
 ```
-
-## 注意事项
-
- 如果对 Git 和 GitHub 不太了解，请参考 [Git 官方文档](https://git-scm.com/book/zh/v2) 或者极客时间的[《玩转 Git 三剑客》](https://time.geekbang.org/course/intro/145)视频课程。
+[提交地址](https://github.com/Go-000/Go-000/issues/)
