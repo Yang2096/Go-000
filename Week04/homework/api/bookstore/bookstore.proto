@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package bookstore;
+
+message AddBookReq {
+    int64 id = 1;
+    string name = 2;
+    string author = 3;
+    int64 year = 4;
+}
+
+message DelBookReq {
+    int64 id = 1;
+}
+
+message GetBookReq {
+    int64 id = 1;
+}
+
+message GetBookResp {
+    string name = 1;
+    string author = 2;
+    int64 year = 3;
+}
+
+
