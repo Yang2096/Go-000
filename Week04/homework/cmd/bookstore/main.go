@@ -1,17 +1,22 @@
 package main
 
 import (
-	"context"
 	"fmt"
-	"io"
 	"log"
-	"net/http"
+	"net"
 	"os"
 	"os/signal"
 	"syscall"
 
+	"week4/api/bookstore"
+
 	"golang.org/x/sync/errgroup"
+	"google.golang.org/grpc"
 )
+
+type bookstoreServer struct {
+	bookstore.UnimplementedBookstoreServer
+}
 
 func main() {
 	group := errgroup.Group{}
@@ -34,29 +39,20 @@ func main() {
 		// httpWork 仅用于通知当前协程 http.ListenAndServe 协程的退出
 		httpWork := make(chan struct{})
 
-		mux := http.NewServeMux()
-		mux.HandleFunc("/index", func(writer http.ResponseWriter, request *http.Request) {
-			io.WriteString(writer, "Hello, world!\n")
-			// 退出通知
+		lis, err := net.Listen("tcp", "20000")
+		s := grpc.NewServer()
+
+		bookstore.RegisterBookstoreServer(s, &bookstoreServer{})
+		if err = s.Serve(lis); err != nil {
 			close(httpWork)
-			return
-		})
-		server := http.Server{
-			Addr:    "127.0.0.1:24000",
-			Handler: mux,
 		}
-
-		go func() {
-			log.Println(server.ListenAndServe())
-		}()
-
 		select {
 		case <-httpWork:
 			close(done)
 			return fmt.Errorf("stoped by http")
 		case <-done:
 			// 其他协程退出了，http server 也关闭
-			server.Shutdown(context.TODO())
+			s.Stop()
 			return fmt.Errorf("stoped by another go routine")
 		}
 	})
