@@ -35,6 +35,9 @@ func main() {
 		}
 	})
 
+	event := InitializeEvent("hello")
+	event.Start()
+
 	group.Go(func() error {
 		// httpWork 仅用于通知当前协程 http.ListenAndServe 协程的退出
 		httpWork := make(chan struct{})
