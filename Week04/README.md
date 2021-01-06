@@ -124,3 +124,10 @@ func main() {
 
 ## 集成测试
 直接测API，用 docker-compose 在本地拉起 MySQL 或 redis
+
+# logging
+
+https://dave.cheney.net/2015/11/05/lets-talk-about-logging
+https://www.ardanlabs.com/blog/2013/11/using-log-package-in-go.html
+https://www.ardanlabs.com/blog/2017/05/design-philosophy-on-logging.html
+https://dave.cheney.net/2017/01/23/the-package-level-logger-anti-pattern
